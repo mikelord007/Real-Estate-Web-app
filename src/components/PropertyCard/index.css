@@ -1,0 +1,6 @@
+.prop-card{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    padding: 1rem;
+}

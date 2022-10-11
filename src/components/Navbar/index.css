@@ -1,0 +1,60 @@
+.navbar{
+    background: #fbfbfe;
+    border-bottom: 1px solid #ebebeb;
+}
+
+.navbar .nav-wrapper{
+    display: flex;
+    align-items: center;
+    padding: 1.2rem;
+    max-width: 1275px;
+    margin: auto;
+    gap: 4rem;
+}
+
+.navbar .nav-wrapper .logo{}
+
+.navbar .nav-wrapper .tabs{}
+
+.navbar .tabs .tablist {
+    display: flex;
+    gap: 2rem;
+}
+
+.navbar .tablist .tabitem{
+    font-family: monospace;
+    font-size: 1.125rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    padding: 0.5rem 0.8rem;
+    border-radius: 4px;
+}
+
+.navbar .tablist .tabitem.selected{
+    color: #7065f0;
+    background: #e8e6f9;
+}
+
+.navbar .nav-wrapper .auth{
+    display: flex;
+    gap: 2rem;
+    margin-left: auto;
+}
+
+.navbar .auth .authbtn{
+    padding: 0.8em 1.3em;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+.navbar .authbtn.login{
+    color: #7065f0;
+    border: 2px solid #e0def7;
+}
+
+.navbar .authbtn.signup{
+    background: #7065f0;
+    color: white;
+}
