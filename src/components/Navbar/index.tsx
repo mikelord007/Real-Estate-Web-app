@@ -16,7 +16,7 @@ const Navbar: React.FC = () => {
         <nav className="navbar">
             <div className='nav-wrapper'>
                 <div className='logo'>
-                    <Link to="/"><img src={Logo} className="logo-img" alt="logo of the company" /></Link>
+                    <Link to="/"><img src={Logo} className="logo-img" alt="logo of the company" loading="eager"/></Link>
                 </div>
                 <div className='tabs'>
                     <ul className='tablist'>

@@ -151,7 +151,7 @@
 
 /* breakpoint: 900 px to 600px */
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 600px) {
     .prop-card {
         max-width: 20rem;
     }

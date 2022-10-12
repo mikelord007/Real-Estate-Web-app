@@ -18,7 +18,10 @@
     display: none;
 }
 
-.navbar .nav-wrapper .logo{}
+.navbar .nav-wrapper .logo{
+    width: 12.125rem;
+    height: 3.1875rem;
+}
 
 .navbar .nav-wrapper .tabs{}
 
@@ -114,6 +117,11 @@
     .navbar .nav-wrapper {
         max-width: initial;
         z-index: 3;
+    }
+
+    .navbar .nav-wrapper .logo{
+        width: auto;
+        height: auto;
     }
 
     .navbar .nav-slider{

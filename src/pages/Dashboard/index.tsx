@@ -1,10 +1,8 @@
 import React from 'react'
 import Navbar from '../../components/Navbar'
 import { BsSearch } from 'react-icons/bs';
-import { BsCalendarRangeFill } from 'react-icons/bs';
-import { IoIosArrowDown } from 'react-icons/io';
-import { MdAddLocationAlt } from 'react-icons/md';
 import PropertyCard from '../../components/PropertyCard'
+import FilterSection from '../../components/FilterSection'
 import './index.css'
 
 const Dashboard: React.FC = () => {
@@ -19,56 +17,7 @@ const Dashboard: React.FC = () => {
             <span className='search-bar-icon'><BsSearch className='search-bar-icon-bsicon'/></span>
           </div>
         </div>
-        <div className='search-filters'>
-          <div className='filter-item location'>
-            <div className='filter-title'>Location</div>
-            <div className='filter-value'>
-              <span className='filter-value-text'>
-                New York, USA
-              </span>
-              <button className='filter-symbol'>
-                <MdAddLocationAlt className="filter-symbol-icon"/>
-              </button>
-            </div>
-          </div>
-          <div className='filter-item-separator' />
-          <div className='filter-item move-in-date'>
-            <div className='filter-title'>When</div>
-            <div className='filter-value'>
-              <span className='filter-value-text'>
-                Select Move-in Date
-              </span>
-              <button className='filter-symbol'>
-                <BsCalendarRangeFill className="filter-symbol-icon calendar-icon"/>
-              </button>
-            </div>
-          </div>
-          <div className='filter-item-separator' />
-          <div className='filter-item price'>
-            <div className='filter-title'>Price</div>
-            <div className='filter-value'>
-              <span className='filter-value-text'>
-                $500 - $2500
-              </span>
-              <button className='filter-symbol'>
-                <IoIosArrowDown className="filter-symbol-icon"/>
-              </button>
-            </div>
-          </div>
-          <div className='filter-item-separator' />
-          <div className='filter-item prop-type'>
-            <div className='filter-title'>Property type</div>
-            <div className='filter-value'>
-              <span className='filter-value-text'>
-                Houses
-              </span>
-              <button className='filter-symbol'>
-                <IoIosArrowDown className="filter-symbol-icon"/>
-              </button>
-            </div>
-          </div>
-          <button className='filter-search-button'>Search</button>
-        </div>
+        <FilterSection />
         <div className='properties'>
           <PropertyCard/>
           <PropertyCard/>

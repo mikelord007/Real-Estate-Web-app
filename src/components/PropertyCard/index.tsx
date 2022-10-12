@@ -12,7 +12,7 @@ const PropertyCard: React.FC = () => {
   return (
     <div className='prop-card'>
       <div className='prop-image-container'>
-        <img src={PropImg} className='prop-image' alt="" />
+        <img src={PropImg} className='prop-image' alt="" loading="lazing" />
       </div>
       <div className="prop-body">
         <div className="prop-details">
