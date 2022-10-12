@@ -4,6 +4,10 @@
     transition: 0.5ms;
 }
 
+html{
+    overflow-y: scroll;
+}
+
 body{
     background: #f7f7fd;
 }
@@ -12,4 +16,31 @@ body{
     max-width: 1100px;
     margin: auto;
     margin-top: 3.5rem;
+}
+
+
+/* breakpoint: 1200 px to 900px */
+
+@media screen and (max-width: 1200px){
+    .page-wrapper {
+        max-width: 830px;
+    }
+}
+
+
+/* breakpoint: 900 px to 600px */
+
+@media screen and (max-width: 900px) {
+    .page-wrapper {
+        max-width: 580px;
+        margin-top: 2.5rem;
+    }
+}
+
+/* breakpoint: 900 px to 600px */
+
+@media screen and (max-width: 600px){
+    .page-wrapper {
+        max-width: 90%;
+    }
 }

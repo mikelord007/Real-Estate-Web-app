@@ -4,3 +4,160 @@
     width: 30%;
     padding: 1rem;
 }
+
+.prop-card .prop-image-container{
+    height: 12rem;
+    border-radius: 6px 6px 0px 0px;
+    position: relative;
+    overflow: clip;
+}
+
+.prop-card .prop-image-container .prop-image{
+    max-width: 100%;
+    min-height: 100%;
+    height: auto;
+}
+
+.prop-card .prop-body{
+    border: 2px solid #e0def7;
+    border-top: 0;
+    border-radius: 6px;
+    padding: 2em;
+    padding-top: 2.5em;
+    padding-bottom: 1.6em;
+    font-family: 'Roboto';
+}
+
+.prop-card .prop-body .prop-details{
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    position: relative;
+}
+
+.prop-card .prop-details .prop-price{
+    color: #7065f0;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.prop-card .prop-details .prop-price-month{
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    color: #939393;
+    font-weight: 500;
+}
+
+.prop-card .prop-details .prop-name{
+    font-size: 1.7rem;
+    font-weight: 700;
+}
+
+.prop-card .prop-details .prop-address{
+    font-size: 1rem;
+    color: #939393;
+    font-weight: 500;
+    line-height: 1.3rem;
+}
+
+.prop-card .prop-details .heart-prop{
+    position: absolute;
+    right: 0rem;
+    height: 2.7rem;
+    width: 2.7rem;
+    border-radius: 50%;
+    border: 2px solid #e0def7;
+}
+
+.prop-card .prop-details .heart-prop:hover{
+    background: #e0def7;
+}
+
+.prop-card .heart-prop .heart-prop-icon{
+    font-size: 1.4rem;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    fill: #7065f0;
+}
+
+.prop-card .prop-body .prop-separator{
+    margin: 1rem 0;
+    width: 100%;
+    height: 2px;
+    background: #e0def7;
+}
+
+.prop-card .prop-body .quick-specs{
+    display: flex;
+    justify-content: space-between;
+}
+
+.prop-card .quick-specs .quick-spec{
+    display: flex;
+    gap: 0.3rem;
+    align-items: center;
+}
+
+.prop-card .quick-spec .quick-spec-name{
+    font-size: 0.725rem;
+    color: #9f9393;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+}
+
+.prop-card .quick-spec .quick-spec-icon-holder .quick-spec-icon{
+    fill: #7065f0;
+    font-size: 1.1rem;
+}
+
+/* breakpoint: 1200 px to 900px */
+
+@media screen and (max-width: 1200px){
+    .prop-card {
+        width: 29%;
+    }
+    .prop-card .prop-body {
+        padding: 1em;
+        padding-top: 1.5em;
+        padding-bottom: 1em;
+    }
+
+    .prop-card .prop-image-container {
+        height: 9rem;
+    }
+
+    .prop-card .prop-body .quick-specs {
+        justify-content: space-around;
+    }
+
+    .prop-card .quick-specs .quick-spec {
+        gap: 0.5rem;
+    }
+
+    .prop-card .quick-spec-name .quick-spec-desc{
+        display: none;
+    }
+}
+
+/* breakpoint: 900 px to 600px */
+
+@media screen and (max-width: 900px) {
+    .prop-card {
+        width: 44%;
+    }
+}
+
+/* breakpoint: 900 px to 600px */
+
+@media screen and (max-width: 900px) {
+    .prop-card {
+        max-width: 20rem;
+    }
+
+    .prop-card {
+        width: 100%;
+        max-width: 20rem;
+    }
+}

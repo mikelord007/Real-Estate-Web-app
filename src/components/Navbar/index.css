@@ -1,20 +1,30 @@
 .navbar{
-    background: #fbfbfe;
     border-bottom: 1px solid #ebebeb;
+    background: #fbfbfe;
 }
 
 .navbar .nav-wrapper{
+    background: #fbfbfe;
     display: flex;
     align-items: center;
     padding: 1.2rem;
     max-width: 1275px;
     margin: auto;
     gap: 4rem;
+    position: relative;
+}
+
+.navbar .nav-slider{
+    display: none;
 }
 
 .navbar .nav-wrapper .logo{}
 
 .navbar .nav-wrapper .tabs{}
+
+.navbar .nav-wrapper .nav-bar-toggle{
+    display: none;
+}
 
 .navbar .tabs .tablist {
     display: flex;
@@ -58,3 +68,143 @@
     background: #7065f0;
     color: white;
 }
+
+
+/* breakpoint: 1200 px to 900px */
+
+@media screen and (max-width: 1200px) {
+    .navbar .nav-wrapper {
+        max-width: 900px;
+    }
+}
+
+/* breakpoint: 900 px to 600px */
+
+@media screen and (max-width: 900px) {
+    .navbar .nav-wrapper {
+        max-width: 600px;
+        gap: 2rem;
+    }
+
+    .navbar .nav-wrapper .logo .logo-img{
+        width: 8rem;
+    }
+
+    .navbar .tabs .tablist {
+        gap: 1rem;
+    }
+
+    .navbar .nav-wrapper .auth {
+        gap: 1rem;
+    }
+
+    .navbar .auth .authbtn {
+        padding: 0.6em 0.8em;
+        font-size: 0.8rem;
+    }
+    
+}
+
+@media screen and (max-width: 600px) {
+    .navbar{
+        position: relative;
+        z-index: initial;
+    }
+
+    .navbar .nav-wrapper {
+        max-width: initial;
+        z-index: 3;
+    }
+
+    .navbar .nav-slider{
+        display: block;
+        font-family: 'Roboto';
+        position: absolute;
+        z-index: 2;
+        top: 100%;
+        width: 100%;
+        text-align: center;
+        padding: 1.3rem 0;
+        background: #ebeaf9;
+        transition: 0.5s;
+        transform: translateY(-100%);
+    }
+
+    .navbar .nav-slider.active{
+        transform: translateY(0%);
+    }
+
+    .navbar .nav-slider .responsive-tabs{
+        display: flex;
+        flex-direction: column;
+        gap: 1.4rem;
+        font-size: 1.3rem;
+    }
+
+    .nav-slider .responsive-tabs .tabitem{
+        font-size: 1.2rem;
+    }
+
+    .nav-slider .responsive-tabs .tabitem.separator{
+        width: 100%;
+        height: 1px;
+        background-color: #d7d7d7;
+    }
+
+    .navbar .nav-wrapper .tabs {
+        display: none;
+    }
+
+    .nav-slider .responsive-tabs .tabitem.buttons{
+        display: flex;
+        justify-content: center;
+        gap: 3rem;
+    }
+
+    .nav-slider .responsive-tabs .tabitem .authbtn{
+        padding: 0.8em 1.5em;
+        font-size: 0.7rem;
+        letter-spacing: 1px;
+        border-radius: 6px;
+        font-weight: 600;
+        /* color: #7065f0; */
+        /* border: 2px solid #e0def7; */
+        background: #7065f0;
+        color: white;
+    }
+
+    .navbar .nav-wrapper .auth {
+        display: none;
+    }
+
+    .navbar .nav-wrapper .nav-bar-toggle{
+        display: block;
+        width: 2.5rem;
+        height: 2.5rem;
+        background: #d1cefb;
+        border-radius: 6px;
+        position: relative;
+        margin-left: auto;
+    }
+
+    .navbar .nav-wrapper .nav-bar-toggle:focus:active{
+        background: #bcb8f5;
+    }
+
+    .navbar .nav-bar-toggle .nav-bar-hamburger{
+        position: absolute;
+        font-size: 1.3rem;
+        fill: #7065f0;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+    }
+
+    .navbar .nav-wrapper .nav-slider{
+        position: absolute;
+        inset: 0;
+        bottom: 0;
+        top: auto;
+        height: 4rem;
+    }
+} 

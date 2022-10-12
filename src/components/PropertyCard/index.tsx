@@ -4,42 +4,46 @@ import { AiFillHeart } from 'react-icons/ai';
 import { BiBed } from 'react-icons/bi';
 import { GiBathtub } from 'react-icons/gi';
 import { BiArea } from 'react-icons/bi';
+import PropImg from '../../assets/PropertyImgSample.jpg'
+import './index.css'
 
 const PropertyCard: React.FC = () => {
+  
   return (
     <div className='prop-card'>
       <div className='prop-image-container'>
-        <img src={'www.exapmle.com'} alt="" />
+        <img src={PropImg} className='prop-image' alt="" />
       </div>
       <div className="prop-body">
         <div className="prop-details">
-          <div>$2,095/month</div>
-          <div>Palm Harbor</div>
-          <div>2699 Green Valley, Highland Lake, FL</div>
+          <div className="prop-price">$2,095<span className="prop-price-month"> /month</span></div>
+          <div className="prop-name">Palm Harbor</div>
+          <div className="prop-address">2699 Green Valley, Highland Lake, FL</div>
           <button className="heart-prop">
             <AiOutlineHeart className="heart-prop-icon" />
           </button>
         </div>
+        <div className="prop-separator"/>
         <div className="quick-specs">
           <div className='quick-spec'>
             <span className='quick-spec-icon-holder'>
-              <BiBed className='quikc-spec-icon'/>
+              <BiBed className='quick-spec-icon'/>
             </span>
             <div className='quick-spec-name'>
-              3 Beds
+              3 <span className='quick-spec-desc'>Beds</span>
             </div>
           </div>
           <div className='quick-spec'>
             <span className='quick-spec-icon-holder'>
-              <GiBathtub className='quikc-spec-icon'/>
+              <GiBathtub className='quick-spec-icon'/>
             </span>
             <div className='quick-spec-name'>
-              2 Bathrooms
+              2 <span className='quick-spec-desc'>Bathrooms</span>
             </div>
           </div>
           <div className='quick-spec'>
             <span className='quick-spec-icon-holder'>
-              <BiArea className='quikc-spec-icon'/>
+              <BiArea className='quick-spec-icon'/>
             </span>
             <div className='quick-spec-name'>
               5 x 7 m<sup>2</sup>

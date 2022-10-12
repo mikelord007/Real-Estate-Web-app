@@ -2,7 +2,7 @@ import React from 'react'
 import Navbar from '../../components/Navbar'
 import { BsSearch } from 'react-icons/bs';
 import { BsCalendarRangeFill } from 'react-icons/bs';
-import { IoIosArrowUp } from 'react-icons/io';
+import { IoIosArrowDown } from 'react-icons/io';
 import { MdAddLocationAlt } from 'react-icons/md';
 import PropertyCard from '../../components/PropertyCard'
 import './index.css'
@@ -51,7 +51,7 @@ const Dashboard: React.FC = () => {
                 $500 - $2500
               </span>
               <button className='filter-symbol'>
-                <IoIosArrowUp className="filter-symbol-icon"/>
+                <IoIosArrowDown className="filter-symbol-icon"/>
               </button>
             </div>
           </div>
@@ -63,13 +63,19 @@ const Dashboard: React.FC = () => {
                 Houses
               </span>
               <button className='filter-symbol'>
-                <IoIosArrowUp className="filter-symbol-icon"/>
+                <IoIosArrowDown className="filter-symbol-icon"/>
               </button>
             </div>
           </div>
           <button className='filter-search-button'>Search</button>
         </div>
         <div className='properties'>
+          <PropertyCard/>
+          <PropertyCard/>
+          <PropertyCard/>
+          <PropertyCard/>
+          <PropertyCard/>
+          <PropertyCard/>
           <PropertyCard/>
         </div>
       </div>
