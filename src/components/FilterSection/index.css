@@ -44,6 +44,11 @@
     font-weight: 700;
     letter-spacing: 0.3px;
     font-size: 1.1rem;
+    width: 8rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    height: 1.2rem;
 }
 
 .search-filters .filter-item .filter-value .filter-symbol{
@@ -113,6 +118,10 @@
     font-weight: 500;
 }
 
+.search-filters .filter-item-value .filter-item-radio{
+    accent-color: #7065f0;
+}
+
 .search-filters .filter-item-value .filter-item-label{
     cursor: pointer;
 }
@@ -141,4 +150,88 @@
 .rdp{
     margin: 0;
     --rdp-accent-color: #7065f0;
+}
+
+@media screen and (max-width: 1200px){
+    .search-filters {
+        justify-content: space-between;
+    }
+
+    .filter-item .filter-value {
+        gap: 0.8rem;
+    }
+
+    .filter-item .filter-title {
+        font-size: 0.9rem;
+    }
+
+    .filter-item .filter-value .filter-value-text {
+        font-size: 1rem;
+        width: 5rem;
+    }
+
+    .filter-item .filter-value .filter-symbol {
+        width: 1.8rem;
+        height: 1.8rem;
+    }
+
+    .search-filters .filter-search-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 5.5rem;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .search-filters {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.8rem;
+        width: 19rem;
+        margin: auto;
+        margin-top: 3rem;
+    }
+
+    .filter-item .filter-title {
+        justify-content: center;
+        display: flex;
+    }
+
+    .filter-item .filter-value {
+        position: relative;
+    }
+
+    .filter-item .filter-value .filter-symbol {
+        position: absolute;
+        left: 111%;
+    }
+
+    .search-filters .filter-item {
+        gap: 0.7rem;
+    }
+
+    .filter-item .filter-value {
+        justify-content: center;
+    }
+
+    .search-filters .filter-search-button {
+        margin-top: 1rem;
+        padding: 0.6em 0.8em;
+        font-size: 1rem;
+        height: auto;
+    }
+}
+
+/* breakpoint: 900 px to 600px */
+
+@media screen and (max-width: 600px){
+    .search-filters {
+        width: 16rem;
+    }
+
+    .filter-item .filter-value .filter-value-text {
+        width: 8rem;
+        text-align: center;
+    }
 }

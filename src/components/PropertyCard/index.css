@@ -58,6 +58,9 @@
     color: #939393;
     font-weight: 500;
     line-height: 1.3rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .prop-card .prop-details .heart-prop{

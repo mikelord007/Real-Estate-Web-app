@@ -5,9 +5,15 @@ import { BiBed } from 'react-icons/bi';
 import { GiBathtub } from 'react-icons/gi';
 import { BiArea } from 'react-icons/bi';
 import PropImg from '../../assets/PropertyImgSample.jpg'
+import {propData, propId} from '../../interfaces'
 import './index.css'
 
-const PropertyCard: React.FC = () => {
+interface PropertyCard extends propData{
+  cachedProps: propId[],
+  setCache: React.Dispatch<React.SetStateAction<propId[]>>
+}
+
+const PropertyCard: React.FC<PropertyCard> = ({price, propName, address, bathCount, bedCount, breadth, length, propId, cachedProps, setCache}) => {
   
   return (
     <div className='prop-card'>
@@ -16,11 +22,11 @@ const PropertyCard: React.FC = () => {
       </div>
       <div className="prop-body">
         <div className="prop-details">
-          <div className="prop-price">$2,095<span className="prop-price-month"> /month</span></div>
-          <div className="prop-name">Palm Harbor</div>
-          <div className="prop-address">2699 Green Valley, Highland Lake, FL</div>
-          <button className="heart-prop">
-            <AiOutlineHeart className="heart-prop-icon" />
+          <div className="prop-price">{price}<span className="prop-price-month"> /month</span></div>
+          <div className="prop-name">{propName}</div>
+          <div className="prop-address">{address}</div>
+          <button className="heart-prop" onClick={() => {cachedProps.includes(propId)?setCache(propId,'remove'):setCache(propId,'add')}} >
+            {cachedProps.includes(propId)?<AiFillHeart className="heart-prop-icon"/>:<AiOutlineHeart className="heart-prop-icon" />}
           </button>
         </div>
         <div className="prop-separator"/>
@@ -30,7 +36,7 @@ const PropertyCard: React.FC = () => {
               <BiBed className='quick-spec-icon'/>
             </span>
             <div className='quick-spec-name'>
-              3 <span className='quick-spec-desc'>Beds</span>
+              {bedCount} <span className='quick-spec-desc'>Beds</span>
             </div>
           </div>
           <div className='quick-spec'>
@@ -38,7 +44,7 @@ const PropertyCard: React.FC = () => {
               <GiBathtub className='quick-spec-icon'/>
             </span>
             <div className='quick-spec-name'>
-              2 <span className='quick-spec-desc'>Bathrooms</span>
+              {bathCount} <span className='quick-spec-desc'>Bathrooms</span>
             </div>
           </div>
           <div className='quick-spec'>
@@ -46,7 +52,7 @@ const PropertyCard: React.FC = () => {
               <BiArea className='quick-spec-icon'/>
             </span>
             <div className='quick-spec-name'>
-              5 x 7 m<sup>2</sup>
+              {length} x {breadth} m<sup>2</sup>
             </div>
           </div>
         </div>

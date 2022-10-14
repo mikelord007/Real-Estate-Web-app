@@ -1,32 +1,30 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Navbar from '../../components/Navbar'
-import { BsSearch } from 'react-icons/bs';
-import PropertyCard from '../../components/PropertyCard'
 import FilterSection from '../../components/FilterSection'
+import SearchBar from '../../components/SearchBar';
+import PropertyContainer from '../../components/PropertyContainer';
+import {propId, propData} from '../../interfaces'
+import states from 'us-state-converter'
 import './index.css'
 
-const Dashboard: React.FC = () => {
+const Dashboard: React.FC<{propData: propData[] | null}> = ({propData}) => {
+
+  const locationOptions = new Set(propData?.map(e => states(e.stateAbbr).name ))
+
+  const [filteredDataIds, setfilteredDataIds] = useState<propId[] | null>(null)
+
+  const propIds = filteredDataIds ? filteredDataIds : Array.from(Array.from({length: 9}, (_, i) => i + 1))
+
   return (
     <>
       <Navbar/>
       <div className='dashboard page-wrapper'>
         <div className='header'>
           <h1 className='title'>Search Properties to rent</h1>
-          <div className='search-bar-container'>
-            <input className="search-bar" type="text" placeholder='Search with Search Bar'/>
-            <span className='search-bar-icon'><BsSearch className='search-bar-icon-bsicon'/></span>
-          </div>
+          <SearchBar />
         </div>
-        <FilterSection />
-        <div className='properties'>
-          <PropertyCard/>
-          <PropertyCard/>
-          <PropertyCard/>
-          <PropertyCard/>
-          <PropertyCard/>
-          <PropertyCard/>
-          <PropertyCard/>
-        </div>
+        <FilterSection setfilteredDataIds={setfilteredDataIds} propData={propData} locationOptions = {locationOptions}/>
+        <PropertyContainer propData={propData} propIds={propIds}/>
       </div>
     </>
   ) 

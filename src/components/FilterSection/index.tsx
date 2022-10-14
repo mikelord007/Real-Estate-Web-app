@@ -3,12 +3,15 @@ import { BsCalendarRangeFill } from 'react-icons/bs';
 import { IoIosArrowDown } from 'react-icons/io';
 import { MdAddLocationAlt } from 'react-icons/md';
 import { DayPicker } from 'react-day-picker';
+import { propId, propData, FilterFieldsManipulation, FilterManagement } from '../../interfaces';
+import { useFilterFieldsManipulation, useFilterManagement } from '../../pages/Dashboard/customFilterHook';
+import states from 'us-state-converter'
 import 'webrouk-custom-range'
 import 'react-day-picker/dist/style.css';
 import './index.css'
 
 declare global {
-  namespace JSX {
+    namespace JSX {
     interface IntrinsicElements {
       'webrouk-custom-range': React.DetailedHTMLProps<
         React.HTMLAttributes<HTMLElement>,
@@ -18,39 +21,59 @@ declare global {
   }
 }
 
-interface FilterBools {
-  location: boolean,
-  date: boolean,
-  price: boolean,
-  propType: boolean,
+interface FilterSection {
+  setfilteredDataIds: React.Dispatch<React.SetStateAction<propId[] | null>>,
+  locationOptions: Set<string>,
+  propData: propData[],
 }
 
-interface FilterActions {
-  type: 'location' | 'date' | 'price' | 'propType' | 'reset',
-  value?: boolean
-}
+const FilterSection: React.FC<FilterSection> = ({ locationOptions, setfilteredDataIds, propData}) => {
 
-const reducer = (state: FilterBools, action: FilterActions) => {
-  if (action.type === 'reset'){
-    return {location: false, date: false, price: false, propType: false }
+  const {selectedLocations, setSelectedLocations, selectedPriceRange, setselectedPriceRange, selectedDate, setSelectedDate, selectedCategory, setSelectedCategory, priceRangeSlider } = useFilterFieldsManipulation()
+  
+  const {showFilters, dispatch, filterRefs, filterBtnRefs} = useFilterManagement()
+  
+  const filterData = () => {
+    const filteredIds = propData.filter(prop => {
+
+      if (selectedLocations.size === 0){
+        return true
+      }
+
+      return selectedLocations.has(states(prop.stateAbbr).name)
+
+    }).
+    filter(prop => {
+
+      if(!selectedPriceRange.from)
+        return true;
+
+      return (Number(prop.price.slice(1)) >= Number(selectedPriceRange.from) && Number(prop.price.slice(1)) <= Number(selectedPriceRange.to))
+
+    }).
+    filter(prop => {
+
+      return(selectedCategory === prop.category)}).
+    filter(prop => {
+
+      if(!prop.availableFrom)
+        return true
+
+      return selectedDate <= new Date(prop.availableFrom)
+    }).
+    map((prop) => (prop.propId)).slice(0,9)
+
+    console.log("filtreed: ", filteredIds)
+
+    setfilteredDataIds(filteredIds)
   }
-  else
-  return {...state,[action.type]: action.value}
-};
-
-const initialFilterBools = {
-  location: false,
-  date: false,
-  price: false,
-  propType: false
-}
-
-const FilterSection: React.FC = () => {
-
-  const [showFilters, dispatch] = useReducer(reducer, initialFilterBools);
-  const [selectedDate, setSelectedDate] = React.useState<Date | undefined>(new Date);
-  const filterRefs = useRef<Array<HTMLUListElement | HTMLDivElement | null>>([])
-  const filterBtnRefs = useRef<Array<HTMLButtonElement | null>>([])
+  
+  const toggleLocationCheckBox = (value: string) => { 
+    if(!selectedLocations.has(value))
+      setSelectedLocations(new Set([...selectedLocations, value]));
+    else { 
+      setSelectedLocations(prev => new Set([...prev].filter(x => x !== value)))
+    }} 
 
   useEffect(() => {
     const clickListener = (e: MouseEvent) => {
@@ -72,33 +95,21 @@ const FilterSection: React.FC = () => {
             <div className='filter-title'>Location</div>
             <div className='filter-value'>
               <span className='filter-value-text'>
-                New York, USA
+                {selectedLocations.size !== 0? Array.from(selectedLocations.values()).join(', '): 'Select Location'}
               </span>
               <button ref={(r: any) => filterBtnRefs.current[0] = r} className='filter-symbol' onClick={() => {dispatch({type: 'location', value: !showFilters.location})}}>
                 <MdAddLocationAlt className="filter-symbol-icon"/>
               </button>
             </div>
             <ul ref={(r) => filterRefs.current[0] = r} className={`filter-item-values filter-item-multiselect ${showFilters.location?'':'dont-show'}`}>
-              <li className="filter-item-value">
-                <input id="r1" className="filter-item-checkbox" type="checkbox" />
-                <label className="filter-item-label" htmlFor="r1">New York, USA</label>
-              </li>
-              <li className="filter-item-value">
-                <input id="r2" className="filter-item-checkbox" type="checkbox" />
-                <label className="filter-item-label" htmlFor="r2">New York, USA</label>
-              </li>
-              <li className="filter-item-value">
-                <input id="r3" className="filter-item-checkbox" type="checkbox" />
-                <label className="filter-item-label" htmlFor="r3">New York, USA</label>
-              </li>
-              <li className="filter-item-value">
-                <input id="r4" className="filter-item-checkbox" type="checkbox" />
-                <label className="filter-item-label" htmlFor="r4">New York, USA</label>
-              </li>
-              <li className="filter-item-value">
-                <input id="r5" className="filter-item-checkbox" type="checkbox" />
-                <label className="filter-item-label" htmlFor="r5">New York, USA</label>
-              </li>
+              {
+                Array.from(locationOptions.values()).map( value => (
+                  <li className="filter-item-value" key={value} onClick={() => toggleLocationCheckBox(value)}>
+                    <input className="filter-item-checkbox" onChange={() => {}} checked={selectedLocations.has(value)} type="checkbox"/>
+                    <label className="filter-item-label" >{value}</label>
+                  </li>
+                ))
+              }
             </ul>
           </div>
           <div className='filter-item-separator' />
@@ -125,14 +136,14 @@ const FilterSection: React.FC = () => {
             <div className='filter-title'>Price</div>
             <div className='filter-value'>
               <span className='filter-value-text'>
-                $500 - $2500
+                {selectedPriceRange.from?`$${selectedPriceRange.from} - $${selectedPriceRange.to}`: 'Select Price'}
               </span>
               <button ref={(r: any) => filterBtnRefs.current[2] = r} className='filter-symbol' onClick={() => {dispatch({type: 'price', value: !showFilters.price})}}>
                 <IoIosArrowDown className="filter-symbol-icon"/>
               </button>
             </div>
             <div ref={(r) => filterRefs.current[2] = r} className={`filter-item-values filter-item-rangeSelect ${showFilters.price?'':'dont-show'}`}>
-              <webrouk-custom-range start="300" end="7000" from="500" to="3000" prefix-char="$">
+              <webrouk-custom-range ref={priceRangeSlider} onTouchMove={(e) => setselectedPriceRange({from: e.target._fromVal, to: e.target._toVal})} onClick={(e) => setselectedPriceRange({from: e.target._fromVal, to: e.target._toVal})} start="300" end="7000" from="500" to="3000" prefix-char="$">
                 <input type="hidden" />
               </webrouk-custom-range>
             </div>
@@ -142,25 +153,25 @@ const FilterSection: React.FC = () => {
             <div className='filter-title'>Property type</div>
             <div className='filter-value'>
               <span className='filter-value-text'>
-                Houses
+                {selectedCategory?selectedCategory:"Select Type"}
               </span>
               <button ref={(r: any) => filterBtnRefs.current[3] = r} className='filter-symbol' onClick={() => {dispatch({type: 'propType', value: !showFilters.propType})}}>
                 <IoIosArrowDown className="filter-symbol-icon"/>
               </button>
               <ul ref={(r) => filterRefs.current[3] = r} className={`filter-item-values filter-item-select ${showFilters.propType?'':'dont-show'}`}>
-                <li className="filter-item-value">
-                  <input id="rad1" name="propType" className="filter-item-radio" type="radio" />
+                <li className="filter-item-value" onClick={() => setSelectedCategory('Houses')}>
+                  <input id="rad1" name="propType" checked={selectedCategory === 'Houses'} onChange={() => {}} className="filter-item-radio" type="radio" />
                   <label className="filter-item-label" htmlFor="rad1">Houses</label>
                 </li>
-                <li className="filter-item-value">
-                  <input id="rad2" name="propType" className="filter-item-radio" type="radio" />
+                <li className="filter-item-value" onClick={() => setSelectedCategory('Apartments')}>
+                  <input id="rad2" name="propType" checked={selectedCategory === 'Apartments'} onChange={() => {}} className="filter-item-radio" type="radio" />
                   <label className="filter-item-label" htmlFor="rad2">Apartments</label>
                 </li>
-            </ul>
+              </ul>
+              </div>
             </div>
+            <button className='filter-search-button' onClick = {() => filterData()}>Search</button>
           </div>
-          <button className='filter-search-button'>Search</button>
-        </div>
   )
 }
 

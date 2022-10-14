@@ -1,0 +1,28 @@
+.dashboard .properties{
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 1.7rem;
+}
+
+@media screen and (max-width: 1200px){
+
+    .dashboard .properties {
+        justify-content: space-between;
+    }
+}
+
+@media screen and (max-width: 900px) {
+
+    .dashboard .properties {
+        margin-top: 3rem;
+    }
+}
+
+/* breakpoint: 900 px to 600px */
+
+@media screen and (max-width: 600px){
+
+    .dashboard .properties {
+        justify-content: center;
+    }
+}

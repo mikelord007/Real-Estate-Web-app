@@ -1,0 +1,45 @@
+.search-bar-container{
+    position: relative;
+}
+
+.search-bar-container .search-bar{
+    border: 2px solid #e0def7;
+    padding: 0.7em 0.9em;
+    border-radius: 6px;
+    padding-right: 3rem;
+    letter-spacing: 0.7px;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    height: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.search-bar-container .search-bar:focus{
+    border: 2px solid #7065f0;
+}
+
+.search-bar-container .search-bar-icon{
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #d8d4ff;
+    padding: 0.3rem;
+    border-radius: 50%;
+    display: inline-block;
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
+.search-bar-container .search-bar-icon:hover{
+    cursor: pointer;
+    background: #7065f0;
+}
+
+.search-bar-icon .search-bar-icon-bsicon{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.9rem;
+}
