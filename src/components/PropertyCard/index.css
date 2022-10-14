@@ -162,5 +162,6 @@
     .prop-card {
         width: 100%;
         max-width: 20rem;
+        box-sizing: border-box;
     }
 }
